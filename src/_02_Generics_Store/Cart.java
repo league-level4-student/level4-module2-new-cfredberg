@@ -12,11 +12,11 @@ import javax.swing.JPanel;
  */
 
 @SuppressWarnings("unchecked")
-public class Cart<T extends Food> {
+public class Cart<T extends Food,NonFood> {
     private T[] cart;
 
     public Cart() {
-        cart = (T[]) new Food[5];
+        cart = (T[]) new Object[5];
     }
 
     // Adds an item to the cart
@@ -41,7 +41,11 @@ public class Cart<T extends Food> {
 
         for (int i = 0; i < cart.length; i++) {
             if (cart[i] != null) {
-                panel.add(cart[i].getFood());
+            	if (cart[i] instanceof Food) {
+            		panel.add(cart[i].getFood());
+            	}else {
+            		panel.add(cart[i].getNonFood());
+            	}
             }
         }
         frame.pack();
