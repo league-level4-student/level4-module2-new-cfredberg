@@ -12,7 +12,7 @@ import javax.swing.JPanel;
  */
 
 @SuppressWarnings("unchecked")
-public class Cart<T extends Food,NonFood> {
+public class Cart<T> {
     private T[] cart;
 
     public Cart() {
@@ -42,9 +42,9 @@ public class Cart<T extends Food,NonFood> {
         for (int i = 0; i < cart.length; i++) {
             if (cart[i] != null) {
             	if (cart[i] instanceof Food) {
-            		panel.add(cart[i].getFood());
+            		panel.add(((Food)cart[i]).getFood());
             	}else {
-            		panel.add(cart[i].getNonFood());
+            		panel.add(((NonFood)cart[i]).getNonFood());
             	}
             }
         }

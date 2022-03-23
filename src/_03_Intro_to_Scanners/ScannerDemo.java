@@ -9,6 +9,7 @@ public class ScannerDemo {
      * Unlike a JOptionPane it is also capable of taking in many data types
      * besides String.
      */
+	
 
     public static void main(String[] args) {
         /*
@@ -25,7 +26,7 @@ public class ScannerDemo {
          * are running your program or the input/output stream you are using.
          */
 
-        
+        Scanner scanner = new Scanner(System.in);
         
         /*
          * 2. Use a syso to ask the user for their name and then use the Scanner
@@ -42,7 +43,8 @@ public class ScannerDemo {
          * String variable.
          */
 
-        
+        System.out.println("Can I have your name please?");
+        String name = scanner.nextLine();
         
         /*
          * 3. Ask the user for their age in the console. Then use the Scanner to
