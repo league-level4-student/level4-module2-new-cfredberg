@@ -1,7 +1,15 @@
 package _06_Console_Store;
 
-public class ConsoleStore {
+import _02_Generics_Store.Candy;
+import _02_Generics_Store.Cart;
+import _02_Generics_Store.Cereal;
 
+public class ConsoleStore {
+	
+	Candy candy = new Candy();
+	Cart cart = new Cart();
+	Cereal cereal = new Cereal();
+	
     /*
      * Write a program that simulates shopping in a store using the Scanner and
      * the classes in Generics_Store.

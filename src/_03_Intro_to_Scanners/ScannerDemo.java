@@ -53,7 +53,8 @@ public class ScannerDemo {
          * See if you can find the scanner method that does this without relying
          * on Integer.parseInt().
          */
-
+        System.out.println("Can I now have your age please?");
+        int age = scanner.nextInt();
         
         
         /*
@@ -63,9 +64,13 @@ public class ScannerDemo {
          * Note: There are many methods similar to the one you used for int that
          * are capable of taking in primitive data types.
          */
-
+        
+        System.out.println("Please input PI to the 12th decimal place:");
+        float pi = scanner.nextFloat();
+        
         // 5.) Print the user's data to the console nicely formatted.
-
+        System.out.println("I know everything about you.");
+        System.out.println("Your name is " + name + ", you are " + age + " years old, and you think PI is " + pi + ".");
         
         
         /*
@@ -74,7 +79,7 @@ public class ScannerDemo {
          * Note: When using a Scanner with the System.in input stream in larger
          * programs only close the scanner when your program is completely done.
          */
-
+        scanner.close();
     }
 
 }
