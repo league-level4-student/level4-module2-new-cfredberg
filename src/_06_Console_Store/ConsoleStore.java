@@ -1,14 +1,16 @@
 package _06_Console_Store;
 
+import java.util.Scanner;
+
 import _02_Generics_Store.Candy;
 import _02_Generics_Store.Cart;
 import _02_Generics_Store.Cereal;
+import _02_Generics_Store.Clothing;
+import _02_Generics_Store.Food;
+import _02_Generics_Store.Toy;
 
 public class ConsoleStore {
 	
-	Candy candy = new Candy();
-	Cart cart = new Cart();
-	Cereal cereal = new Cereal();
 	
     /*
      * Write a program that simulates shopping in a store using the Scanner and
@@ -45,7 +47,39 @@ public class ConsoleStore {
      */
 
     public static void main(String[] args) {
-
+    	ConsoleStore cs = new ConsoleStore();
+    	cs.run();
     }
+
+    Scanner scanner = new Scanner(System.in);
+    Cart cart = new Cart();
+    String name = "";
+	public void run() {
+		shop();
+	}
+	
+	String choice = "";
+	public void shop() {
+		do {
+			System.out.println("You can either add an item to your cart, remove an item from your cart, or check out.  What do you choose? [a, r, c]");
+			choice = scanner.nextLine();
+			if (choice.equals("a")) {
+				do {
+					System.out.println("You can either add candy, cereal, clothing, a toy, or nothing to your cart.  What do you choose? [ca, ce, cl, t, n]");
+					choice = scanner.nextLine();
+				} while (!choice.equals("ca") && !choice.equals("ce") && !choice.equals("cl") && !choice.equals("t") && !choice.equals("n"));
+				
+				if (choice.equals("ca")) {
+					cart.add(new Candy());
+				}else if (choice.equals("ce")) {
+					cart.add(new Cereal());
+				}else if (choice.equals("cl")) {
+					cart.add(new Clothing());
+				}else if (choice.equals("t")) {
+					cart.add(new Toy());
+				}
+			}
+		}
+	}
 
 }
