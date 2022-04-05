@@ -54,32 +54,96 @@ public class ConsoleStore {
     Scanner scanner = new Scanner(System.in);
     Cart cart = new Cart();
     String name = "";
+    
+    final int CANDY = 1;
+    final int CEREAL = 2;
+    final int CLOTHING = 3;
+    final int TOY = 4;
+    
 	public void run() {
 		shop();
 	}
 	
-	String choice = "";
+	String firstChoice = "";
+	String secondChoice = "";
 	public void shop() {
 		do {
-			System.out.println("You can either add an item to your cart, remove an item from your cart, or check out.  What do you choose? [a, r, c]");
-			choice = scanner.nextLine();
-			if (choice.equals("a")) {
+			System.out.println("You can either add an item to your cart, remove an item from your cart, view the contents in your card, or check out.  What do you choose? [a, r, v, c]");
+			firstChoice = scanner.nextLine();
+			if (firstChoice.equals("a")) {
 				do {
 					System.out.println("You can either add candy, cereal, clothing, a toy, or nothing to your cart.  What do you choose? [ca, ce, cl, t, n]");
-					choice = scanner.nextLine();
-				} while (!choice.equals("ca") && !choice.equals("ce") && !choice.equals("cl") && !choice.equals("t") && !choice.equals("n"));
+					secondChoice = scanner.nextLine();
+				} while (!secondChoice.equals("ca") && !secondChoice.equals("ce") && !secondChoice.equals("cl") && !secondChoice.equals("t") && !secondChoice.equals("n"));
 				
-				if (choice.equals("ca")) {
+				if (secondChoice.equals("ca")) {
 					cart.add(new Candy());
-				}else if (choice.equals("ce")) {
+				}else if (secondChoice.equals("ce")) {
 					cart.add(new Cereal());
-				}else if (choice.equals("cl")) {
+				}else if (secondChoice.equals("cl")) {
 					cart.add(new Clothing());
-				}else if (choice.equals("t")) {
+				}else if (secondChoice.equals("t")) {
+					cart.add(new Toy());
+				}
+			}else if (firstChoice.equals("r")) {
+				do {
+					System.out.println("You can either remove candy, cereal, clothing, a toy, or nothing from your cart.  What do you choose? [ca, ce, cl, t, n]");
+					secondChoice = scanner.nextLine();
+				}while (!secondChoice.equals("ca") && !secondChoice.equals("ce") && !secondChoice.equals("cl") && !secondChoice.equals("t") && !secondChoice.equals("n"));
+				
+				if (secondChoice.equals("ca")) {
+					if (viewCart(CANDY) > 0) {
+						//Continue removing items
+					}else {
+						System.out.println("I am sorry.  You have no candy in your cart, so you can't remove any.");
+					}
+				}else if (secondChoice.equals("ce")) {
+					cart.add(new Cereal());
+				}else if (secondChoice.equals("cl")) {
+					cart.add(new Clothing());
+				}else if (secondChoice.equals("t")) {
 					cart.add(new Toy());
 				}
 			}
+		}while (!firstChoice.equals("c"));
+	}
+	
+	public int viewCart(int checkItem) {
+		if (checkItem == CANDY) {
+			int candyCount = 0;
+			for (int i = 0; i < cart.length(); i++) {
+				if (cart.viewCart()[i] instanceof Candy) {
+					candyCount++;
+				}
+			}
+			return candyCount;
+		}else if (checkItem == CEREAL) {
+			int cerealCount = 0;
+			for (int i = 0; i < cart.length(); i++) {
+				if (cart.viewCart()[i] instanceof Cereal) {
+					cerealCount++;
+				}
+			}
+			return cerealCount;
+		}else if (checkItem == CLOTHING) {
+			int clothingCount = 0;
+			for (int i = 0; i < cart.length(); i++) {
+				if (cart.viewCart()[i] instanceof Clothing) {
+					clothingCount++;
+				}
+			}
+			return clothingCount;
+		}else if (checkItem == TOY) {
+			int toyCount = 0;
+			for (int i = 0; i < cart.length(); i++) {
+				if (cart.viewCart()[i] instanceof Toy) {
+					toyCount++;
+				}
+			}
+			return toyCount;
 		}
+		
+		return 0;
 	}
 
 }

@@ -55,4 +55,8 @@ public class Cart<T> {
     public int length() {
         return cart.length;
     }
+    
+    public Object[] viewCart() {
+    	return cart;
+    }
 }
