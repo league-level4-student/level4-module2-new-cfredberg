@@ -56,7 +56,22 @@ public class Cart<T> {
         return cart.length;
     }
     
-    public Object[] viewCart() {
+    public T[] viewCart() {
     	return cart;
+    }
+    
+    public void removeItem(int index) {
+    	T[] newCart = (T[]) new Object[cart.length];
+    	int progress = 0;
+    	for (int i = 0; i < cart.length; i++) {
+    		if (i == index) {
+    			continue;
+    		}else {
+    			newCart[progress] = cart[i];
+    			progress++;
+    		}
+    	}
+    	
+    	cart = newCart;
     }
 }

@@ -92,8 +92,8 @@ public class ConsoleStore {
 				}while (!secondChoice.equals("ca") && !secondChoice.equals("ce") && !secondChoice.equals("cl") && !secondChoice.equals("t") && !secondChoice.equals("n"));
 				
 				if (secondChoice.equals("ca")) {
-					if (viewCart(CANDY) > 0) {
-						//Continue removing items
+					if (itemCount(CANDY) > 0) {
+						
 					}else {
 						System.out.println("I am sorry.  You have no candy in your cart, so you can't remove any.");
 					}
@@ -108,7 +108,7 @@ public class ConsoleStore {
 		}while (!firstChoice.equals("c"));
 	}
 	
-	public int viewCart(int checkItem) {
+	public int itemCount(int checkItem) {
 		if (checkItem == CANDY) {
 			int candyCount = 0;
 			for (int i = 0; i < cart.length(); i++) {
@@ -143,7 +143,35 @@ public class ConsoleStore {
 			return toyCount;
 		}
 		
-		return 0;
+		return -1;
+	}
+	
+	public int findFirstItem(int item) {
+		if (item == CANDY) {
+			for (int i = 0; i < cart.length(); i++) {
+				if (cart.viewCart()[i] instanceof Candy) {
+					return i;
+				}
+			}
+		} else if (item == CEREAL) {
+			for (int i = 0; i < cart.length(); i++) {
+				if (cart.viewCart()[i] instanceof Cereal) {
+					return i;
+				}
+			}
+		} else if (item == CLOTHING) {
+			for (int i = 0; i < cart.length(); i++) {
+				if (cart.viewCart()[i] instanceof Clothing) {
+					return i;
+				}
+			}
+		} else if (item == TOY) {
+			for (int i = 0; i < cart.length(); i++) {
+				if (cart.viewCart()[i] instanceof Toy) {
+					return i;
+				}
+			}
+		}
 	}
 
 }
