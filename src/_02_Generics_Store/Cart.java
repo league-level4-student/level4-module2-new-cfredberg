@@ -37,7 +37,7 @@ public class Cart<T> {
         JPanel panel = new JPanel();
         frame.add(panel);
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         for (int i = 0; i < cart.length; i++) {
             if (cart[i] != null) {

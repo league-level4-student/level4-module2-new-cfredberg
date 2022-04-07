@@ -1,5 +1,6 @@
 package _06_Console_Store;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import _02_Generics_Store.Candy;
@@ -61,7 +62,13 @@ public class ConsoleStore {
     final int TOY = 4;
     
 	public void run() {
+		greeting();
 		shop();
+		checkOut();
+	}
+	
+	public void greeting() {
+		System.out.println("Hello.  How much money do you have today?");
 	}
 	
 	String firstChoice = "";
@@ -93,19 +100,37 @@ public class ConsoleStore {
 				
 				if (secondChoice.equals("ca")) {
 					if (itemCount(CANDY) > 0) {
-						
+						cart.removeItem(findFirstItem(CANDY));
 					}else {
 						System.out.println("I am sorry.  You have no candy in your cart, so you can't remove any.");
 					}
 				}else if (secondChoice.equals("ce")) {
-					cart.add(new Cereal());
+					if (itemCount(CEREAL) > 0) {
+						cart.removeItem(findFirstItem(CEREAL));
+					}else {
+						System.out.println("I am sorry.  You have no cereal in your cart, so you can't remove any.");
+					}
 				}else if (secondChoice.equals("cl")) {
-					cart.add(new Clothing());
+					if (itemCount(CLOTHING) > 0) {
+						cart.removeItem(findFirstItem(CLOTHING));
+					}else {
+						System.out.println("I am sorry.  You have no clothing in your cart, so you can't remove any.");
+					}
 				}else if (secondChoice.equals("t")) {
-					cart.add(new Toy());
+					if (itemCount(TOY) > 0) {
+						cart.removeItem(findFirstItem(TOY));
+					}else {
+						System.out.println("I am sorry.  You don't have any toys in your cart, so you can't remove any.");
+					}
 				}
+			}else if (firstChoice.equals("v")) {
+				cart.showCart();
 			}
 		}while (!firstChoice.equals("c"));
+	}
+	
+	public void checkOut() {
+		
 	}
 	
 	public int itemCount(int checkItem) {
@@ -172,6 +197,7 @@ public class ConsoleStore {
 				}
 			}
 		}
+		
+		return -1;
 	}
-
 }
