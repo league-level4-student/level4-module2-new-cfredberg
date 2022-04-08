@@ -61,14 +61,25 @@ public class ConsoleStore {
     final int CLOTHING = 3;
     final int TOY = 4;
     
+    final double CANDY_PRICE = 17.99;
+    final double CEREAL_PRICE = 9.99;
+    final double CLOTHING_PRICE = 30.99;
+    final double TOY_PRICE = 0.99;
+    
 	public void run() {
 		greeting();
 		shop();
 		checkOut();
 	}
 	
+	float money = -1;
 	public void greeting() {
-		System.out.println("Hello.  How much money do you have today?");
+		do {
+			System.out.println("Hello.  How much money do you have today?");
+			money = scanner.nextFloat();
+		}while(money < 0);
+		
+		System.out.println("Thank you.  Have a nice time shopping!");
 	}
 	
 	String firstChoice = "";
@@ -129,8 +140,21 @@ public class ConsoleStore {
 		}while (!firstChoice.equals("c"));
 	}
 	
-	public void checkOut() {
-		
+	public boolean checkOut() {
+		System.out.println("Hello customer.  What is your name?");
+		String name = scanner.nextLine();
+		System.out.println("Nice to meet you " + name + ".  My name is Java.  I love coffee.");
+		System.out.println("You have $" + money + " and your cart is valued at $" + calcTotal() + ".");
+		if (money > calcTotal()) {
+			String cont = "";
+			do {
+				System.out.println("Would you like to continue? [y, n]");
+				cont = scanner.nextLine();
+			}while (!cont.equals("y") && !cont.equals("n"));
+			if (cont.equals("y")) {
+				
+			}
+		}
 	}
 	
 	public int itemCount(int checkItem) {
@@ -199,5 +223,21 @@ public class ConsoleStore {
 		}
 		
 		return -1;
+	}
+	
+	public double calcTotal() {
+		double tempTotal = 0;
+		for (int i = 0; i < cart.length(); i++) {
+			if (cart.viewCart()[i] instanceof Candy) {
+				tempTotal = tempTotal + CANDY_PRICE;
+			}else if (cart.viewCart()[i] instanceof Cereal) {
+				tempTotal = tempTotal + CEREAL_PRICE;
+			}else if (cart.viewCart()[i] instanceof Clothing) {
+				tempTotal = tempTotal + CLOTHING_PRICE;
+			}else if (cart.viewCart()[i] instanceof Toy) {
+				tempTotal = tempTotal + TOY_PRICE;
+			}
+		}
+		return tempTotal;
 	}
 }
