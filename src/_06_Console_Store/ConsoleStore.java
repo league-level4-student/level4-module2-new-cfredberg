@@ -68,11 +68,16 @@ public class ConsoleStore {
     
 	public void run() {
 		greeting();
-		shop();
-		checkOut();
+		boolean cont = false;
+		do {
+			shop();
+			cont = checkOut();
+			if (cont) cont = doMoreShopping();
+		}while (!cont);
+		System.exit(0);
 	}
 	
-	float money = -1;
+	double money = -1;
 	public void greeting() {
 		do {
 			System.out.println("Hello.  How much money do you have today?");
@@ -86,7 +91,7 @@ public class ConsoleStore {
 	String secondChoice = "";
 	public void shop() {
 		do {
-			System.out.println("You can either add an item to your cart, remove an item from your cart, view the contents in your card, or check out.  What do you choose? [a, r, v, c]");
+			System.out.println("You can either add an item to your cart, remove an item from your cart, view the contents in your cart, view the prices of items, or check out.  What do you choose? [a, r, vc, vp, c]");
 			firstChoice = scanner.nextLine();
 			if (firstChoice.equals("a")) {
 				do {
@@ -134,8 +139,13 @@ public class ConsoleStore {
 						System.out.println("I am sorry.  You don't have any toys in your cart, so you can't remove any.");
 					}
 				}
-			}else if (firstChoice.equals("v")) {
+			}else if (firstChoice.equals("vc")) {
 				cart.showCart();
+			}else if (firstChoice.equals("vp")) {
+				System.out.println("Candy Price: $" + CANDY_PRICE);
+				System.out.println("Cereal Price: $" + CEREAL_PRICE);
+				System.out.println("Clothing Price: $" + CLOTHING_PRICE);
+				System.out.println("Toy Price: $" + TOY_PRICE);
 			}
 		}while (!firstChoice.equals("c"));
 	}
@@ -152,9 +162,29 @@ public class ConsoleStore {
 				cont = scanner.nextLine();
 			}while (!cont.equals("y") && !cont.equals("n"));
 			if (cont.equals("y")) {
-				
+				money = money - calcTotal();
+				System.out.println("You now have $" + money + " left.");
+				return true;
+			}else {
+				return false;
 			}
 		}
+		System.out.println("I am sorry.  Your cart is too expensive.  Please remove items, and come back when you are done.");
+		return false;
+	}
+	
+	public boolean doMoreShopping() {
+		String cont = "";
+		do {
+			System.out.println("Would you like to continue shopping? [y, n]");
+			cont = scanner.nextLine();
+		} while(!cont.equals("y") && !cont.equals("n"));
+		if (cont.equals("y")) {
+			cart = new Cart();
+			return false;
+		}
+		System.out.println("Thank you for shopping with us!");
+		return true;
 	}
 	
 	public int itemCount(int checkItem) {
